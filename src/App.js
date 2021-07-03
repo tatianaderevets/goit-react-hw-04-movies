@@ -1,30 +1,20 @@
 // import logo from './logo.svg';
 import './App.css';
-import { Route, NavLink, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import MoviesPage from './pages/MoviesPage';
 import NotFoundPage from './pages/NotFoundPage';
+import MovieDetailsPage from './pages/MovieDetailsPage';
+import Navigation from './components/Navigation';
+
 
 function App() {
   return (
     <>
-      <ul>
-        <li><NavLink
-          exact
-          to='/' className="NavLink"
-          activeClassName="NavLink--active">
-          Home
-        </NavLink>
-        </li>
-        <li><NavLink to='/movies'
-          className="NavLink"
-          activeClassName="NavLink--active">
-          Movies
-        </NavLink>
-        </li>
-      </ul>
+      <Navigation />
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route path="/movies/:id" component={MovieDetailsPage} />
         <Route path="/movies" component={MoviesPage} />
         <Route component={NotFoundPage} />
       </Switch>
