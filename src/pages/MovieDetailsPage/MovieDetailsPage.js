@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import axios from "axios"
+import axios from "axios";
+import { Link, Route } from 'react-router-dom';
+import Cast from '../../components/Cast';
+import Reviews from '../../components/Reviews';
 
 function getFilmById(id) {
     return axios({
@@ -37,6 +40,12 @@ class MovieDetailsPage extends Component {
                 <button type="button" onClick={this.handleGoBack}>Go back</button>
                 <h1>{film.title}</h1>
                 <p>{film.overview}</p>
+                <ul>
+                    <li><Link to={{ pathname: `${this.props.match.url}/cast`, state: this.props.location.state }}>Cast</Link></li>
+                    <li><Link to={{ pathname: `${this.props.match.url}/reviews`, state: this.props.location.state }}>Revievs</Link></li>
+                </ul>
+                <Route path={`${this.props.match.path}/cast`} component={Cast} />
+                <Route path={`${this.props.match.path}/reviews`} component={Reviews} />
             </>
         )
     }
