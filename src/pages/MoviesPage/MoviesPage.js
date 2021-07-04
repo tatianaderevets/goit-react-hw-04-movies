@@ -1,15 +1,9 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { getFilmByQuery } from "../../Service/Api"
 // import SearchForm from '../../components/SearchForm';
 import MoviesList from '../../components/MoviesList';
 
-function getFilmByQuery(query) {
-    return axios({
-        method: "GET",
-        url: "https://api.themoviedb.org/3/search/movie?api_key=b5cddda93f9edc63139a7ad5e58c546a&query=" +
-            query,
-    })
-}
+
 
 class MoviesPage extends Component {
     state = {
