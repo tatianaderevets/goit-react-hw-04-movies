@@ -1,9 +1,11 @@
-import React, { Component, Suspense } from 'react';
+import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { getFilmById } from "../../Service/Api"
 import Cast from '../../components/Cast';
 import Reviews from '../../components/Reviews';
 import Loader from "react-loader-spinner";
+
+
 
 
 class MovieDetailsPage extends Component {
@@ -14,11 +16,13 @@ class MovieDetailsPage extends Component {
 
 
     async componentDidMount() {
-        console.log(this.props);
-        const id = this.props.location.state.id;
-        const response = await getFilmById(id);
-        this.setState({ film: response.data })
-        console.log("film", this.state.film);
+
+        if (this.props.location.state?.id !== undefined) {
+            const id = this.props.location.state.id;
+            const response = await getFilmById(id);
+            this.setState({ film: response.data });
+            // console.log("film", this.state.film);
+        }
 
 
     }
@@ -48,10 +52,10 @@ class MovieDetailsPage extends Component {
                     <li><Link to={{ pathname: `${this.props.match.url}/cast`, state: this.props.location.state }}>Cast</Link></li>
                     <li><Link to={{ pathname: `${this.props.match.url}/reviews`, state: this.props.location.state }}>Revievs</Link></li>
                 </ul>
-                <Suspense fallback={<Loader type="Puff" color="#00BFFF" height={500} width={500} timeout={3000} />}>
-                    <Route path={`${this.props.match.path}/cast`} component={Cast} />
-                    <Route path={`${this.props.match.path}/reviews`} component={Reviews} />
-                </Suspense>
+
+                <Route path={`${this.props.match.path}/cast`} component={Cast} />
+                <Route path={`${this.props.match.path}/reviews`} component={Reviews} />
+
 
             </>
         )

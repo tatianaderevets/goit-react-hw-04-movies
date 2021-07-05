@@ -7,10 +7,12 @@ class Reviews extends Component {
     }
 
     async componentDidMount() {
-        const id = this.props.location.state.id;
-        const response = await getReviewsInfo(id);
-        this.setState({ reviews: response.data.results });
-        console.log("reviews++", this.state.reviews);
+        if (this.props.location.state?.id !== undefined) {
+            const id = this.props.location.state.id;
+            const response = await getReviewsInfo(id);
+            this.setState({ reviews: response.data.results });
+        }
+        // console.log("reviews++", this.state.reviews);
     }
 
     render() {
